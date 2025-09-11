@@ -179,17 +179,33 @@ function error() {
 }
 
 function getWeather(lat, lon) {
-  const apiKey = "a7b01b6b094588d5bff66ef49286e550";
+  const apiKey = "a7b01b6b094588d5bff66ef49286e550"; // Replace with your OpenWeatherMap API key
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
 
   fetch(url)
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
-      const temp = Math.round(data.main.temp);
       const city = data.name;
+      const temp = Math.round(data.main.temp);
       const desc = data.weather[0].description;
-      document.getElementById("weatherDisplay").innerHTML =
-        `${city}: ${temp}°F, ${desc}`;
+      const iconCode = data.weather[0].icon;
+      const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+      document.getElementById("weatherLocation").innerText = city;
+      document.getElementById("weatherTemp").innerText = `${temp}°F`;
+      document.getElementById("weatherDesc").innerText = desc;
+      document.getElementById("weatherIcon").src = iconUrl;
     })
-    .catch(err => console.error("Weather fetch error:", err));
+    .catch(err => {
+      console.error("Weather fetch error:", err);
+      document.getElementById("weatherWidget").innerText = "Weather unavailable";
+    });
 }
+
+navigator.geolocation.getCurrentPosition(
+  pos => getWeather(pos.coords.latitude, pos.coords.longitude),
+  err => {
+    console.error("Location error:", err);
+    document.getElementById("weatherWidget").innerText = "Location not found";
+  }
+);
