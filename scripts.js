@@ -11,3 +11,16 @@ const updateDate = () => {
 }
 updateDate();
 setInterval(updateDate, 1000);
+
+document.getElementById("searchBtn").addEventListener("click", () => {
+  const query = document.getElementById("searchInput").value.trim();
+  if (query) {
+    window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+  }
+});
+
+document.getElementById("searchInput").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    document.getElementById("searchBtn").click();
+  }
+});
