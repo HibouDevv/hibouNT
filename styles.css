@@ -262,3 +262,40 @@ body.light-mode .name-input-group button {
   background-color: #dddddd;
   color: #000000;
 }
+
+#userName {
+  padding: 12px;
+  font-size: 1.2em;
+  width: 300px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+#saveName {
+  padding: 12px 20px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  background-color: #3a3a3a;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#saveName:hover {
+  background-color: #5a5a5a;
+  box-shadow: 0 0 10px #ffffff33;
+}
+
+body.light-mode #userName {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.light-mode #saveName {
+  background-color: #dddddd;
+  color: #000000;
+}
