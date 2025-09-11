@@ -165,3 +165,49 @@ saveNameBtn.addEventListener("click", () => {
     updateDate();
   }
 });
+
+const bookmarksBar = document.getElementById("bookmarksBar");
+const addBtn = document.getElementById("addBookmark");
+const nameInput = document.getElementById("bookmarkName");
+const urlInput = document.getElementById("bookmarkURL");
+
+let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+
+function renderBookmarks() {
+  bookmarksBar.innerHTML = "";
+  bookmarks.forEach((bookmark, index) => {
+    const link = document.createElement("a");
+    link.href = bookmark.url;
+    link.target = "_blank";
+    link.className = "bookmark";
+    link.innerText = bookmark.name;
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerText = "✕";
+    deleteBtn.onclick = () => {
+      bookmarks.splice(index, 1);
+      saveBookmarks();
+    };
+
+    link.appendChild(deleteBtn);
+    bookmarksBar.appendChild(link);
+  });
+}
+
+function saveBookmarks() {
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  renderBookmarks();
+}
+
+addBtn.addEventListener("click", () => {
+  const name = nameInput.value.trim();
+  const url = urlInput.value.trim();
+  if (!name || !url) return;
+
+  bookmarks.push({ name, url });
+  nameInput.value = "";
+  urlInput.value = "";
+  saveBookmarks();
+});
+
+window.addEventListener("DOMContentLoaded", renderBookmarks);
