@@ -87,3 +87,13 @@ menuToggle.addEventListener("click", () => {
   const isVisible = settingsMenu.style.display === "block";
   settingsMenu.style.display = isVisible ? "none" : "block";
 });
+
+document.addEventListener("click", (e) => {
+  const menu = document.getElementById("settingsMenu");
+  const toggle = document.getElementById("menuToggle");
+
+  if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+    menu.style.display = "none";
+  }
+});
+
