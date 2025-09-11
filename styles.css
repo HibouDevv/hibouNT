@@ -140,7 +140,7 @@ body.light-mode .settings-panel select {
   color: #ffffff;
   cursor: pointer;
   user-select: none;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease;
   animation: pulseDots 2s infinite;
 }
 
@@ -180,6 +180,10 @@ body.light-mode .menu-panel {
 
 body.light-mode .menu-panel select {
   background-color: #ffffff;
+  color: #000000;
+}
+
+body.light-mode .menu-icon {
   color: #000000;
 }
 
