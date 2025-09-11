@@ -1,164 +1,20 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --bg-color: #fff;
-  --text-color: #000;
-  --input-bg: #f0f0f0;
-  --input-color: #000;
-}
-
-body.dark {
-  --bg-color: #121212;
-  --text-color: #fff;
-  --input-bg: #1f1f1f;
-  --input-color: #fff;
-}
-
 body {
-  background: var(--bg-color);
-  color: var(--text-color);
-  font-family: sans-serif;
+  background-color: #000000;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  overflow-x: hidden;
+  margin: 0;
+  font-weight: lighter;
 }
 
-/* Particle container and animation */
-.container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  background-color: rgb(41, 37, 37);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+#currentTime {
+  font-size: 20em;
+  color: #ffffff;
 }
 
-.particle-container .particle {
-  position: absolute;
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-  background: radial-gradient(rgb(255, 245, 153) 40%, rgb(247, 211, 51), orange, rgb(255, 81, 0));
-  box-shadow: 3px 5px 10px rgba(255, 255, 255, 0.514);
+#currentDate {
+  font-size: 5em;
+  color: #a8a8a8;
 }
-
-/* Example particle positions */
-.particle-container .particle:nth-child(1) { top: 12%; left: 42%; animation: particle-motion 1s linear infinite; }
-/* Repeat for all 20 particles... */
-
-/* Particle animation */
-@keyframes particle-motion {
-  0% { transform: translate(0); opacity: 1; }
-  20% { transform: translate(5px, -20px); opacity: 0.8; }
-  40% { transform: translate(-10px, -30px); opacity: 0.7; }
-  60% { transform: translate(15px, -40px); opacity: 0.5; }
-  80% { transform: translate(-20px, -60px); opacity: 0.2; }
-  100% { transform: translate(40px, -100px); opacity: 0; }
-}
-
-/* Centered glowing text */
-    .text-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: rgb(255, 193, 59);
-      text-shadow: 2px 1px 5px crimson;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      letter-spacing: 2px;
-    }
-
-    .text-content h1 {
-      font-size: 4rem;
-    }
-
-    .text-content p {
-      font-size: 1.2rem;
-      font-style: italic;
-      font-weight: lighter;
-      width: 80%;
-    }
-
-    .search-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .title {
-      font-size: 16px;
-      margin-bottom: 10px;
-      opacity: 0.8;
-      letter-spacing: 0.5px;
-    }
-
-    form {
-      display: flex;
-      width: 100%;
-      max-width: 500px;
-    }
-
-    input[type="text"] {
-      flex: 1;
-      padding: 12px 16px;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      background: var(--input-bg);
-      color: var(--input-color);
-      outline: none;
-    }
-
-    .menu {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 24px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .settings-popup {
-      position: absolute;
-      top: 60px;
-      right: 20px;
-      background: var(--bg-color);
-      color: var(--text-color);
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      padding: 12px 16px;
-      display: none;
-      z-index: 10;
-    }
-
-    .settings-popup label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .settings-popup select {
-      padding: 6px;
-      font-size: 14px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      background: var(--input-bg);
-      color: var(--input-color);
-    }
