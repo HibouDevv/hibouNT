@@ -448,3 +448,71 @@ body.light-mode .bookmark-icon::after {
   background-color: #000000;
   color: #ffffff;
 }
+
+.folders-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 60px;
+  justify-content: center;
+}
+
+.folder {
+  background-color: #1e1e1e;
+  padding: 15px;
+  border-radius: 8px;
+  width: 220px;
+  color: #ffffff;
+}
+
+.folder h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.folder .bookmark-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.folder .bookmark {
+  background-color: #333;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.folder-form {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.folder-form input {
+  padding: 10px;
+  font-size: 1em;
+  border: none;
+  border-radius: 4px;
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.folder-form button {
+  padding: 10px 15px;
+  font-size: 1em;
+  background-color: #3a3a3a;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
