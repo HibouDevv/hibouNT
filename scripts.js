@@ -11,11 +11,3 @@ const updateDate = () => {
 }
 updateDate();
 setInterval(updateDate, 1000);
-/*
-const searchForm = document.getElementById("searchForm");
-const searchInput = document.getElementById("searchInput");
-
-const savedEngine = localStorage.getItem("searchEngine") || "bing";
-      applySearchEngine(savedEngine);
-    });
-*/
