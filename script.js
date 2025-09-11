@@ -176,21 +176,14 @@ let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 function renderBookmarks() {
   bookmarksBar.innerHTML = "";
   bookmarks.forEach((bookmark, index) => {
-    const link = document.createElement("a");
-    link.href = bookmark.url;
-    link.target = "_blank";
-    link.className = "bookmark";
-    link.innerText = bookmark.name;
+    const icon = document.createElement("a");
+    icon.href = bookmark.url;
+    icon.target = "_blank";
+    icon.className = "bookmark-icon";
+    icon.setAttribute("data-tooltip", `${bookmark.name} (${bookmark.url})`);
+    icon.innerText = bookmark.name[0].toUpperCase(); // First letter as icon
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.innerText = "✕";
-    deleteBtn.onclick = () => {
-      bookmarks.splice(index, 1);
-      saveBookmarks();
-    };
-
-    link.appendChild(deleteBtn);
-    bookmarksBar.appendChild(link);
+    bookmarksBar.appendChild(icon);
   });
 }
 
