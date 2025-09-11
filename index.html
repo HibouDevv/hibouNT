@@ -33,13 +33,25 @@
     </div>
   </div>
 </div>
-    
-    <div id="currentTime"></div>
-    <div id="currentDate"></div>
-    <div class="search-container">
-      <input type="text" id="searchInput" placeholder="Search the web..." />
-      <button id="searchBtn">Search</button>
+
+    <div id="namePrompt" class="overlay">
+      <div class="prompt-box">
+        <label for="userName">What should we call you?</label>
+        <input type="text" id="userName" placeholder="Enter your name..." />
+        <button id="saveName">Save</button>
+      </div>
     </div>
+    
+    <div id="mainContent" style="display: none;">
+  <div id="greeting"></div>
+  <div id="currentTime"></div>
+  <div id="currentDate"></div>
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search the web..." />
+    <button id="searchBtn">Search</button>
+  </div>
+</div>
+    
     <script src="script.js"></script>
   </body>
 </html>
