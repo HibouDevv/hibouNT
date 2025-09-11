@@ -14,11 +14,13 @@ body {
 #currentTime {
   font-size: 20em;
   color: #ffffff;
+  text-align: center;
 }
 
 #currentDate {
   font-size: 5em;
   color: #a8a8a8;
+  text-align: center;
 }
 
 .search-container {
@@ -28,6 +30,7 @@ body {
   opacity: 0;
   animation: slideUp 0.8s ease-out forwards;
   animation-delay: 0.5s;
+  justify-content: center;
 }
 
 @keyframes slideUp {
