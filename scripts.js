@@ -79,3 +79,11 @@ document.getElementById("searchEngine").addEventListener("change", (e) => {
   selectedEngine = e.target.value;
   localStorage.setItem("searchEngine", selectedEngine);
 });
+
+const menuToggle = document.getElementById("menuToggle");
+const settingsMenu = document.getElementById("settingsMenu");
+
+menuToggle.addEventListener("click", () => {
+  const isVisible = settingsMenu.style.display === "block";
+  settingsMenu.style.display = isVisible ? "none" : "block";
+});
