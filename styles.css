@@ -204,7 +204,6 @@ body.light-mode .menu-icon {
 }
 
 .menu-icon:hover {
-  transform: rotate(90deg);
   animation: pulseDots 0.6s ease;
 }
 
