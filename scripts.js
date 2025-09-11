@@ -1,10 +1,3 @@
-const searchForm = document.getElementById("searchForm");
-const searchInput = document.getElementById("searchInput");
-
-const savedEngine = localStorage.getItem("searchEngine") || "bing";
-      applySearchEngine(savedEngine);
-    });
-
 const updateTime = () => {
   const currentTimeElement = document.getElementById('currentTime');
   currentTimeElement.innerHTML = new Date().toTimeString().split(' ')[0].split(':').slice(0, 2).join(':');
@@ -18,3 +11,10 @@ const updateDate = () => {
 }
 updateDate();
 setInterval(updateDate, 1000);
+
+const searchForm = document.getElementById("searchForm");
+const searchInput = document.getElementById("searchInput");
+
+const savedEngine = localStorage.getItem("searchEngine") || "bing";
+      applySearchEngine(savedEngine);
+    });
