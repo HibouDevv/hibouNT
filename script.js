@@ -204,3 +204,77 @@ addBtn.addEventListener("click", () => {
 });
 
 window.addEventListener("DOMContentLoaded", renderBookmarks);
+
+const foldersContainer = document.getElementById("foldersContainer");
+const addFolderBtn = document.getElementById("addFolder");
+const folderNameInput = document.getElementById("folderName");
+
+let folders = JSON.parse(localStorage.getItem("folders")) || [];
+
+function renderFolders() {
+  foldersContainer.innerHTML = "";
+  folders.forEach((folder, folderIndex) => {
+    const folderDiv = document.createElement("div");
+    folderDiv.className = "folder";
+
+    const header = document.createElement("h3");
+    header.innerHTML = `${folder.name} <button onclick="deleteFolder(${folderIndex})">✕</button>`;
+    folderDiv.appendChild(header);
+
+    const bookmarkList = document.createElement("div");
+    bookmarkList.className = "bookmark-list";
+
+    folder.bookmarks.forEach((bookmark, bookmarkIndex) => {
+      const item = document.createElement("div");
+      item.className = "bookmark";
+      item.innerHTML = `
+        <a href="${bookmark.url}" target="_blank">${bookmark.name}</a>
+        <button onclick="deleteBookmark(${folderIndex}, ${bookmarkIndex})">✕</button>
+      `;
+      bookmarkList.appendChild(item);
+    });
+
+    const addForm = document.createElement("div");
+    addForm.innerHTML = `
+      <input type="text" placeholder="Name" id="name-${folderIndex}" />
+      <input type="url" placeholder="URL" id="url-${folderIndex}" />
+      <button onclick="addBookmark(${folderIndex})">Add</button>
+    `;
+    folderDiv.appendChild(bookmarkList);
+    folderDiv.appendChild(addForm);
+    foldersContainer.appendChild(folderDiv);
+  });
+}
+
+function saveFolders() {
+  localStorage.setItem("folders", JSON.stringify(folders));
+  renderFolders();
+}
+
+addFolderBtn.addEventListener("click", () => {
+  const name = folderNameInput.value.trim();
+  if (!name) return;
+  folders.push({ name, bookmarks: [] });
+  folderNameInput.value = "";
+  saveFolders();
+});
+
+function addBookmark(folderIndex) {
+  const name = document.getElementById(`name-${folderIndex}`).value.trim();
+  const url = document.getElementById(`url-${folderIndex}`).value.trim();
+  if (!name || !url) return;
+  folders[folderIndex].bookmarks.push({ name, url });
+  saveFolders();
+}
+
+function deleteBookmark(folderIndex, bookmarkIndex) {
+  folders[folderIndex].bookmarks.splice(bookmarkIndex, 1);
+  saveFolders();
+}
+
+function deleteFolder(folderIndex) {
+  folders.splice(folderIndex, 1);
+  saveFolders();
+}
+
+window.addEventListener("DOMContentLoaded", renderFolders);
