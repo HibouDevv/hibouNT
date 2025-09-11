@@ -115,3 +115,53 @@ document.addEventListener("click", (e) => {
     settingsMenu.style.display = "none";
   }
 });
+
+const namePrompt = document.getElementById("namePrompt");
+const saveNameBtn = document.getElementById("saveName");
+const mainContent = document.getElementById("mainContent");
+
+const updateGreeting = () => {
+  const greetingElement = document.getElementById("greeting");
+  const name = localStorage.getItem("userName") || "friend";
+  const hour = new Date().getHours();
+  let greeting = "";
+
+  if (hour < 5) {
+    greeting = "Good night";
+  } else if (hour < 12) {
+    greeting = "Good morning";
+  } else if (hour < 17) {
+    greeting = "Good afternoon";
+  } else {
+    greeting = "Good evening";
+  }
+
+  greetingElement.innerHTML = `${greeting}, ${name}`;
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  const savedName = localStorage.getItem("userName");
+
+  if (!savedName) {
+    namePrompt.style.display = "flex";
+    mainContent.style.display = "none";
+  } else {
+    namePrompt.style.display = "none";
+    mainContent.style.display = "block";
+    updateGreeting();
+    updateTime();
+    updateDate();
+  }
+});
+
+saveNameBtn.addEventListener("click", () => {
+  const input = document.getElementById("userName").value.trim();
+  if (input) {
+    localStorage.setItem("userName", input);
+    namePrompt.style.display = "none";
+    mainContent.style.display = "block";
+    updateGreeting();
+    updateTime();
+    updateDate();
+  }
+});
