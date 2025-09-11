@@ -320,3 +320,15 @@ body.light-mode #saveName {
 body.light-mode #greeting {
   color: #000000;
 }
+
+.weather-widget {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #ffffff;
+  font-size: 1.2em;
+}
+
+body.light-mode .weather-widget {
+  color: #000000;
+}
