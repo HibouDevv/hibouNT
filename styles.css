@@ -140,6 +140,8 @@ body.light-mode .settings-panel select {
   color: #ffffff;
   cursor: pointer;
   user-select: none;
+  transition: transform 0.3s ease;
+  animation: pulseDots 2s infinite;
 }
 
 .menu-panel {
@@ -190,4 +192,14 @@ body.light-mode .menu-panel select {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+@keyframes pulseDots {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.menu-icon:hover {
+  transform: rotate(90deg);
 }
