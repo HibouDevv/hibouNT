@@ -1,36 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>New Tab</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="menu" onclick="toggleSettings()">⋮</div>
-
-  <div class="settings-popup" id="settingsPopup">
-    <label>
-      <input type="checkbox" id="themeToggle" onchange="toggleTheme()" />
-      Dark Theme
-    </label>
-    <label>
-      Search Engine:
-      <select id="searchEngineSelect" onchange="changeSearchEngine()">
-        <option value="bing">Bing</option>
-        <option value="google">Google</option>
-        <option value="duckduckgo">DuckDuckGo</option>
-      </select>
-    </label>
-  </div>
-
-  <div class="search-container">
-    <div class="title">Universe</div>
-    <form id="searchForm" method="GET">
-      <input type="text" id="searchInput" name="q" placeholder="Search..." autofocus />
-    </form>
-  </div>
-  
-  <script src="script.js"></script>
-</body>
+<html>
+  <head>
+    <title>New Tab</title>
+    <link rel="stylesheet" href="newtab.css">
+  </head>
+  <body>
+    <div id="currentTime"></div>
+    <div id="currentDate"></div>
+    <script src="newtab.js"></script>
+  </body>
 </html>
