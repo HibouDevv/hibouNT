@@ -300,8 +300,18 @@ window.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".todo-container").classList.add("visible");
 });
 
-window.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => {
-    document.querySelector(".todo-container").classList.add("visible");
-  }, 2500); // adjust this to match your greeting duration
+document.getElementById("saveNameBtn").addEventListener("click", () => {
+  const name = document.getElementById("nameInput").value.trim();
+  if (name) {
+    localStorage.setItem("username", name); // optional: store it
+    showGreeting(name);                     // display greeting
+    revealTodoList();                       // fade in to-do list
+  }
 });
+
+function revealTodoList() {
+  const todo = document.querySelector(".todo-container");
+  setTimeout(() => {
+    todo.classList.add("visible");
+  }, 500); // slight delay after greeting appears
+}
