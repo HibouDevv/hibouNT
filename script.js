@@ -237,10 +237,3 @@ todoInput.addEventListener("keypress", (e) => {
 });
 
 window.addEventListener("DOMContentLoaded", renderTodos);
-
-window.addEventListener("DOMContentLoaded", () => {
-  const todo = document.querySelector(".todo-container");
-  setTimeout(() => {
-    todo.classList.add("visible");
-  }, 100); // slight delay for smoother effect
-});
