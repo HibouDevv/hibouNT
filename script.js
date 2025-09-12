@@ -295,3 +295,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   renderTodos();
 });
+
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelector(".todo-container").classList.add("visible");
+});
