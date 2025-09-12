@@ -179,13 +179,8 @@ tsParticles.load("tsparticles", {
   },
   interactivity: {
     events: {
-      onHover: { enable: true, mode: "repulse" }, // You can change to "bubble" or "none"
+      onHover: { enable: false }, // You can change to "bubble" or "none"
       onClick: { enable: true, mode: "push" }
     },
-    modes: {
-      repulse: { distance: 100 },
-      push: { quantity: 4 }
-    }
-  },
   background: { color: "transparent" }
 });
