@@ -73,41 +73,6 @@ body.light-mode #searchInput {
   box-shadow: 0 0 10px #ffffff33;
 }
 
-.settings-panel {
-  margin-top: 40px;
-  padding: 20px;
-  background-color: #1e1e1e;
-  color: #ffffff;
-  border-radius: 8px;
-  width: 320px;
-  text-align: left;
-  opacity: 0;
-  transform: scale(0.95);
-  animation: popIn 0.6s ease-out forwards;
-  animation-delay: 1s;
-}
-
-@keyframes popIn {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.setting-group {
-  margin-bottom: 15px;
-}
-
-.settings-panel select {
-  width: 100%;
-  padding: 8px;
-  font-size: 1em;
-  background-color: #2e2e2e;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-}
-
 body.light-mode {
   background-color: #ffffff;
   color: #000000;
@@ -137,90 +102,6 @@ body.light-mode .settings-panel select {
   to {
     opacity: 1;
   }
-}
-
-.menu-wrapper {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-
-.menu-icon {
-  font-size: 24px;
-  color: #ffffff;
-  cursor: pointer;
-  user-select: none;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.menu-panel {
-  display: none;
-  position: absolute;
-  top: 30px;
-  right: 0;
-  background-color: #1e1e1e;
-  color: #ffffff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px #00000055;
-  width: 200px;
-  z-index: 100;
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-.menu-panel select {
-  width: 100%;
-  margin-top: 5px;
-  padding: 8px;
-  background-color: #2e2e2e;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-}
-
-.setting-group {
-  margin-bottom: 15px;
-}
-
-body.light-mode .menu-panel {
-  background-color: #f0f0f0;
-  color: #000000;
-}
-
-body.light-mode .menu-panel select {
-  background-color: #ffffff;
-  color: #000000;
-}
-
-body.light-mode .menu-icon {
-  color: #000000;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes pulseDots {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
-
-.menu-icon:hover {
-  animation: pulseDots 0.6s ease;
-}
-
-@keyframes pulseDots {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.3); }
-  100% { transform: scale(1); }
 }
 
 #mainContent {
