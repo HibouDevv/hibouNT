@@ -332,8 +332,8 @@ body.light-mode #greeting {
 
 .todo-container {
   position: fixed;
-  bottom: 5px;   /* Move closer to bottom */
-  right: 5px;    /* Move closer to right edge */
+  bottom: 10px;   /* Move closer to bottom */
+  right: 10px;    /* Move closer to right edge */
   width: 250px;
   background-color: #1e1e1e;
   color: #ffffff;
