@@ -237,3 +237,61 @@ todoInput.addEventListener("keypress", (e) => {
 });
 
 window.addEventListener("DOMContentLoaded", renderTodos);
+
+window.addEventListener("DOMContentLoaded", () => {
+  const todo = document.querySelector(".todo-container");
+  setTimeout(() => {
+    todo.classList.add("visible");
+  }, 100);
+
+  const todoInput = document.getElementById("todoInput");
+  const todoList = document.getElementById("todoList");
+  let todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+  function renderTodos() {
+    todoList.innerHTML = "";
+    todos.forEach((todo, index) => {
+      const li = document.createElement("li");
+      li.textContent = todo.text;
+      if (todo.done) li.classList.add("checked");
+
+      li.onclick = () => {
+        todos[index].done = !todos[index].done;
+        saveTodos();
+      };
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "✕";
+      deleteBtn.style.background = "none";
+      deleteBtn.style.border = "none";
+      deleteBtn.style.color = "inherit";
+      deleteBtn.style.cursor = "pointer";
+      deleteBtn.onclick = (e) => {
+        e.stopPropagation();
+        todos.splice(index, 1);
+        saveTodos();
+      };
+
+      li.appendChild(deleteBtn);
+      todoList.appendChild(li);
+    });
+  }
+
+  function saveTodos() {
+    localStorage.setItem("todos", JSON.stringify(todos));
+    renderTodos();
+  }
+
+  todoInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      const text = todoInput.value.trim();
+      if (text) {
+        todos.push({ text, done: false });
+        todoInput.value = "";
+        saveTodos();
+      }
+    }
+  });
+
+  renderTodos();
+});
