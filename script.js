@@ -165,3 +165,26 @@ saveNameBtn.addEventListener("click", () => {
     updateDate();
   }
 });
+
+tsParticles.load("tsparticles", {
+  fullScreen: { enable: false },
+  particles: {
+    number: { value: 60 },
+    size: { value: 3 },
+    move: { enable: true, speed: 0.6 },
+    color: { value: "#888888" }, // Neutral tone for light/dark
+    opacity: { value: 0.5 },
+    shape: { type: "circle" },
+  },
+  interactivity: {
+    events: {
+      onHover: { enable: true, mode: "grab" },
+      onClick: { enable: true, mode: "push" }
+    },
+    modes: {
+      grab: { distance: 100, links: { enable: false } },
+      push: { quantity: 4 }
+    }
+  },
+  background: { color: "transparent" }
+});
