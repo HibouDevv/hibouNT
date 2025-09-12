@@ -332,8 +332,8 @@ body.light-mode #greeting {
 
 .todo-container {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 10px;   /* Move closer to bottom */
+  right: 10px;    /* Move closer to right edge */
   width: 250px;
   background-color: #1e1e1e;
   color: #ffffff;
@@ -342,6 +342,14 @@ body.light-mode #greeting {
   font-size: 0.9em;
   box-shadow: 0 0 10px #00000033;
   z-index: 1000;
+}
+
+@media (max-width: 600px) {
+  .todo-container {
+    bottom: 5px;
+    right: 5px;
+    width: 90%;
+  }
 }
 
 .todo-container h4 {
