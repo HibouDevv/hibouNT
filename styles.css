@@ -297,6 +297,7 @@ body.light-mode #todoInput {
   height: 0; /* or minimal height if needed */
 }
 
+/* Overlay */
 #settingsOverlay {
   position: fixed;
   top: 0;
@@ -316,6 +317,7 @@ body.light-mode #todoInput {
   pointer-events: auto;
 }
 
+/* Sidebar */
 .settings-sidebar {
   width: 220px;
   background-color: #111;
@@ -334,12 +336,19 @@ body.light-mode #todoInput {
   cursor: pointer;
 }
 
+.settings-sidebar li.active {
+  font-weight: bold;
+  color: #0ff;
+}
+
+/* Content */
 .settings-content {
   flex: 1;
   padding: 30px;
   color: #fff;
 }
 
+/* Close Button */
 #closeSettings {
   position: absolute;
   top: 20px;
