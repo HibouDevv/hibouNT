@@ -339,9 +339,9 @@ body.light-mode #greeting {
 
 .todo-container {
   position: absolute;
-  margin-top: 20px;
-  bottom: 10px;
-  right: 10px;
+  margin: 10px;
+  bottom: 0;
+  right: 0;
   width: 250px;
   background-color: #1e1e1e;
   color: #ffffff;
@@ -349,7 +349,7 @@ body.light-mode #greeting {
   border-radius: 8px;
   font-size: 0.9em;
   box-shadow: 0 0 10px #00000033;
-  z-index: 9999;
+  z-index: 10;
   pointer-events: auto;
   opacity: 0;
   transform: translateY(20px);
@@ -408,4 +408,10 @@ body.light-mode #todoList li {
 body.light-mode #todoInput {
   background-color: #ffffff;
   color: #000000;
+}
+
+.layout-anchor {
+  position: relative;
+  width: 100%;
+  height: 0; /* or minimal height if needed */
 }
