@@ -299,3 +299,9 @@ window.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".todo-container").classList.add("visible");
 });
+
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    document.querySelector(".todo-container").classList.add("visible");
+  }, 2500); // adjust this to match your greeting duration
+});
