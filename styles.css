@@ -341,14 +341,19 @@ body.light-mode #greeting {
   border-radius: 8px;
   font-size: 0.9em;
   box-shadow: 0 0 10px #00000033;
-  z-index: 9999; /* Make sure it's above other elements */
+  z-index: 9999;
+  pointer-events: auto;
+  animation: slideIn 0.5s ease-out;
 }
 
-@media (max-width: 600px) {
-  .todo-container {
-    bottom: 5px;
-    right: 5px;
-    width: 90%;
+@keyframes slideIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
