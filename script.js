@@ -100,22 +100,6 @@ window.addEventListener("DOMContentLoaded", () => {
   updateTime(); // ensure correct format on load
 });
 
-// Menu toggle
-const menuToggle = document.getElementById("menuToggle");
-const settingsMenu = document.getElementById("settingsMenu");
-
-menuToggle.addEventListener("click", () => {
-  const isVisible = settingsMenu.style.display === "block";
-  settingsMenu.style.display = isVisible ? "none" : "block";
-});
-
-// Close menu when clicking outside
-document.addEventListener("click", (e) => {
-  if (!settingsMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-    settingsMenu.style.display = "none";
-  }
-});
-
 const namePrompt = document.getElementById("namePrompt");
 const saveNameBtn = document.getElementById("saveName");
 const mainContent = document.getElementById("mainContent");
@@ -315,3 +299,13 @@ function revealTodoList() {
     todo.classList.add("visible");
   }, 500); // slight delay after greeting appears
 }
+
+function openSettings() {
+  document.getElementById("settingsOverlay").classList.add("settings-visible");
+}
+
+function closeSettings() {
+  document.getElementById("settingsOverlay").classList.remove("settings-visible");
+}
+
+document.getElementById("closeSettings").addEventListener("click", closeSettings);
