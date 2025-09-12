@@ -172,17 +172,18 @@ tsParticles.load("tsparticles", {
     number: { value: 60 },
     size: { value: 3 },
     move: { enable: true, speed: 0.6 },
-    color: { value: "#888888" }, // Neutral tone for light/dark
+    color: { value: "#888888" }, // Neutral for light/dark mode
     opacity: { value: 0.5 },
     shape: { type: "circle" },
+    links: { enable: false } // 🔥 This disables all lines
   },
   interactivity: {
     events: {
-      onHover: { enable: true, mode: "grab" },
+      onHover: { enable: true, mode: "repulse" }, // You can change to "bubble" or "none"
       onClick: { enable: true, mode: "push" }
     },
     modes: {
-      grab: { distance: 100, links: { enable: false } },
+      repulse: { distance: 100 },
       push: { quantity: 4 }
     }
   },
