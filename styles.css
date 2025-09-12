@@ -32,6 +32,12 @@ body {
   justify-content: center;
 }
 
+body.light-mode .search-container {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ccc;
+}
+
 @keyframes slideUp {
   to {
     transform: translateY(0);
