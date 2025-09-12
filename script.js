@@ -284,7 +284,7 @@ window.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".todo-container").classList.add("visible");
 });
 
-document.getElementById("saveNameBtn").addEventListener("click", () => {
+document.getElementById("saveName").addEventListener("click", () => {
   const name = document.getElementById("nameInput").value.trim();
   if (name) {
     localStorage.setItem("username", name); // optional: store it
