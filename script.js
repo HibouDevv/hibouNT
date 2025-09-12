@@ -309,3 +309,83 @@ function closeSettings() {
 }
 
 document.getElementById("closeSettings").addEventListener("click", closeSettings);
+
+// Section templates
+const sections = {
+  theme: `
+    <h3>Theme Settings</h3>
+    <label>
+      <input type="checkbox" id="themeToggle" />
+      Enable Dark Mode
+    </label>
+  `,
+  particles: `
+    <h3>Particles</h3>
+    <label>
+      <input type="checkbox" id="particlesToggle" />
+      Show Background Particles
+    </label>
+  `,
+  sound: `
+    <h3>Ambient Sound</h3>
+    <label>
+      <input type="checkbox" id="soundToggle" disabled />
+      Coming Soon
+    </label>
+  `,
+  greeting: `
+    <h3>Greeting</h3>
+    <input type="text" id="greetingInput" placeholder="Enter your greeting" />
+    <button onclick="saveGreeting()">Save</button>
+  `,
+  todo: `
+    <h3>To-Do Settings</h3>
+    <button onclick="clearTodo()">Clear All Tasks</button>
+  `
+};
+
+// Load section content
+document.querySelectorAll(".settings-sidebar li").forEach((item) => {
+  item.addEventListener("click", () => {
+    document.querySelectorAll(".settings-sidebar li").forEach(li => li.classList.remove("active"));
+    item.classList.add("active");
+    const section = item.getAttribute("data-section");
+    document.getElementById("settingsPanel").innerHTML = sections[section] || "<p>Coming soon.</p>";
+    wireUpSection(section);
+  });
+});
+
+// Open/Close overlay
+document.getElementById("openSettings").addEventListener("click", () => {
+  document.getElementById("settingsOverlay").classList.add("settings-visible");
+});
+document.getElementById("closeSettings").addEventListener("click", () => {
+  document.getElementById("settingsOverlay").classList.remove("settings-visible");
+});
+
+// Section-specific logic
+function wireUpSection(section) {
+  if (section === "theme") {
+    document.getElementById("themeToggle").addEventListener("change", (e) => {
+      document.body.classList.toggle("dark-mode", e.target.checked);
+    });
+  }
+
+  if (section === "particles") {
+    document.getElementById("particlesToggle").addEventListener("change", (e) => {
+      const particles = document.getElementById("particlesCanvas");
+      if (particles) particles.style.display = e.target.checked ? "block" : "none";
+    });
+  }
+}
+
+function saveGreeting() {
+  const greeting = document.getElementById("greetingInput").value;
+  localStorage.setItem("customGreeting", greeting);
+  alert("Greeting saved!");
+}
+
+function clearTodo() {
+  localStorage.removeItem("todoList");
+  alert("To-do list cleared!");
+}
