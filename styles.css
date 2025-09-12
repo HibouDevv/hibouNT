@@ -415,3 +415,57 @@ body.light-mode #todoInput {
   width: 100%;
   height: 0; /* or minimal height if needed */
 }
+
+#settingsOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(20, 20, 20, 0.95);
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 9999;
+}
+
+#settingsOverlay.settings-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.settings-sidebar {
+  width: 220px;
+  background-color: #111;
+  color: #fff;
+  padding: 20px;
+  border-right: 1px solid #333;
+}
+
+.settings-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.settings-sidebar li {
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.settings-content {
+  flex: 1;
+  padding: 30px;
+  color: #fff;
+}
+
+#closeSettings {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  color: #fff;
+  cursor: pointer;
+}
