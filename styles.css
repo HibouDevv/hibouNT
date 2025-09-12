@@ -337,7 +337,7 @@ body.light-mode #greeting {
 }
 
 .todo-container {
-  position: fixed;
+  margin-top: 20px;
   bottom: 10px;
   right: 10px;
   width: 250px;
