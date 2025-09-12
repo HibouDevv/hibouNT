@@ -172,15 +172,16 @@ tsParticles.load("tsparticles", {
     number: { value: 60 },
     size: { value: 3 },
     move: { enable: true, speed: 0.6 },
-    color: { value: "#888888" }, // Neutral for light/dark mode
+    color: { value: "#888888" },
     opacity: { value: 0.5 },
     shape: { type: "circle" },
-    links: { enable: false } // 🔥 This disables all lines
+    links: { enable: false }
   },
   interactivity: {
     events: {
-      onHover: { enable: false }, // You can change to "bubble" or "none"
-      onClick: { enable: true, mode: "push" }
-    },
+      onHover: { enable: false },
+      onClick: { enable: false }
+    }
+  },
   background: { color: "transparent" }
 });
