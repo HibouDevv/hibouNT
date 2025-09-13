@@ -1,40 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
     <title>HibouNT</title>
+    <link rel="icon" href="images/hibount-dark-removebg.png" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   </head>
   <body>
   <div id="tsparticles"></div>
-
-  <div class="menu-wrapper">
-  <div class="menu-icon" id="menuToggle">⋮</div>
-  <div class="menu-panel" id="settingsMenu">
-    <div class="setting-group">
-      <label for="themeToggle">Theme:</label>
-      <select id="themeToggle">
-        <option value="dark">Dark</option>
-        <option value="light">Light</option>
-      </select>
-    </div>
-    <div class="setting-group">
-      <label for="clockFormat">Clock Format:</label>
-      <select id="clockFormat">
-        <option value="24">24-Hour</option>
-        <option value="12">12-Hour</option>
-      </select>
-    </div>
-    <div class="setting-group">
-      <label for="searchEngine">Search Engine:</label>
-      <select id="searchEngine">
-        <option value="google">Google</option>
-        <option value="bing">Bing</option>
-        <option value="duckduckgo">DuckDuckGo</option>
-      </select>
-    </div>
-  </div>
-</div>
 
 <div id="namePrompt" class="overlay">
   <div class="prompt-box">
@@ -64,6 +38,18 @@
     <input type="text" id="todoInput" placeholder="Add a task..." />
   </div>
 </div>
+
+<!-- Settings Overlay -->
+<div id="settingsOverlay" class="settings-hidden">
+  <div class="settings-content">
+    <h2>Settings</h2>
+    <div id="settingsPanel"></div>
+  </div>
+  <button id="closeSettings">✕</button>
+</div>
+
+<!-- Trigger Button -->
+<button id="openSettings">⚙️</button>
     
     <script src="script.js"></script>
   </body>
