@@ -105,6 +105,9 @@ body.light-mode .settings-panel select {
 }
 
 #mainContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
@@ -358,4 +361,59 @@ body.light-mode #todoInput {
   font-size: 1.5em;
   color: #fff;
   cursor: pointer;
+}
+
+#openSettings {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #3a3a3a;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  font-size: 1.2em;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+}
+
+#openSettings:hover {
+  background-color: #5a5a5a;
+  box-shadow: 0 0 10px #ffffff33;
+}
+body.light-mode .settings-sidebar {
+  background-color: #f0f0f0;
+  color: #000;
+  border-right: 1px solid #ccc;
+}
+#openSettings.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.search-hint {
+  margin-top: 10px;
+  text-align: center;
+  color: #888;
+  font-size: 0.9em;
+}
+body.light-mode .search-hint {
+  color: #555;
+}
+
+.esc-label {
+  .esc-label {
+  font-size: 0.8em;
+  margin-right: 6px;
+  padding: 2px 6px;
+  background-color: #333;
+  border-radius: 4px;
+  color: #ccc;
+  font-family: monospace;
+  opacity: 0.8;
+}}
+
+body.light-mode .esc-label {
+  color: #555;
 }

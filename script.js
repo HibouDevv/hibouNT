@@ -27,28 +27,6 @@ updateDate();
 setInterval(updateTime, 1000);
 setInterval(updateDate, 1000);
 
-// Theme toggle
-document.getElementById("themeToggle").addEventListener("change", (e) => {
-  const theme = e.target.value;
-  document.body.classList.toggle("light-mode", theme === "light");
-  localStorage.setItem("theme", theme);
-});
-
-// Search engine selection
-let selectedEngine = "google"; // default
-
-document.getElementById("searchEngine").addEventListener("change", (e) => {
-  selectedEngine = e.target.value;
-  localStorage.setItem("searchEngine", selectedEngine);
-});
-
-// Clock format selection
-document.getElementById("clockFormat").addEventListener("change", (e) => {
-  clockFormat = e.target.value;
-  localStorage.setItem("clockFormat", clockFormat);
-  updateTime(); // refresh immediately
-});
-
 // Search logic
 document.getElementById("searchBtn").addEventListener("click", () => {
   const query = document.getElementById("searchInput").value.trim();
@@ -74,30 +52,6 @@ document.getElementById("searchInput").addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     document.getElementById("searchBtn").click();
   }
-});
-
-// Load saved preferences
-window.addEventListener("DOMContentLoaded", () => {
-  const savedTheme = localStorage.getItem("theme");
-  const savedEngine = localStorage.getItem("searchEngine");
-  const savedFormat = localStorage.getItem("clockFormat");
-
-  if (savedTheme) {
-    document.getElementById("themeToggle").value = savedTheme;
-    document.body.classList.toggle("light-mode", savedTheme === "light");
-  }
-
-  if (savedEngine) {
-    document.getElementById("searchEngine").value = savedEngine;
-    selectedEngine = savedEngine;
-  }
-
-  if (savedFormat) {
-    document.getElementById("clockFormat").value = savedFormat;
-    clockFormat = savedFormat;
-  }
-
-  updateTime(); // ensure correct format on load
 });
 
 const namePrompt = document.getElementById("namePrompt");
@@ -147,6 +101,7 @@ saveNameBtn.addEventListener("click", () => {
     updateGreeting();
     updateTime();
     updateDate();
+    document.querySelector(".todo-container").classList.add("visible"); // ✅ move this here
   }
 });
 
@@ -356,20 +311,18 @@ document.querySelectorAll(".settings-sidebar li").forEach((item) => {
 });
 
 // Open/Close overlay
-document.getElementById("openSettings").addEventListener("click", () => {
+function openSettings() {
   document.getElementById("settingsOverlay").classList.add("settings-visible");
-});
-document.getElementById("closeSettings").addEventListener("click", () => {
-  document.getElementById("settingsOverlay").classList.remove("settings-visible");
-});
+  document.getElementById("openSettings").style.display = "none"; // 🔥 hide button
+}
 
-// Section-specific logic
-function wireUpSection(section) {
-  if (section === "theme") {
-    document.getElementById("themeToggle").addEventListener("change", (e) => {
-      document.body.classList.toggle("dark-mode", e.target.checked);
-    });
-  }
+function closeSettings() {
+  document.getElementById("settingsOverlay").classList.remove("settings-visible");
+  document.getElementById("openSettings").style.display = "block"; // ✨ show button
+}
+
+document.getElementById("openSettings").addEventListener("click", openSettings);
+document.getElementById("closeSettings").addEventListener("click", closeSettings);
 
   if (section === "particles") {
     document.getElementById("particlesToggle").addEventListener("change", (e) => {
@@ -377,7 +330,6 @@ function wireUpSection(section) {
       if (particles) particles.style.display = e.target.checked ? "block" : "none";
     });
   }
-}
 
 function saveGreeting() {
   const greeting = document.getElementById("greetingInput").value;
@@ -389,3 +341,27 @@ function clearTodo() {
   localStorage.removeItem("todoList");
   alert("To-do list cleared!");
 }
+
+document.addEventListener("keydown", (e) => {
+  // ESC to close settings
+  if (e.key === "Escape") {
+    const overlay = document.getElementById("settingsOverlay");
+    if (overlay && overlay.classList.contains("settings-visible")) {
+      closeSettings();
+    }
+  }
+
+  // "/" to focus search input
+  if (
+    e.key === "/" &&
+    !e.ctrlKey &&
+    !e.metaKey &&
+    !e.altKey &&
+    document.activeElement.tagName !== "INPUT" &&
+    document.activeElement.tagName !== "TEXTAREA"
+  ) {
+    e.preventDefault(); // prevent browser Quick Find
+    const searchInput = document.getElementById("searchInput");
+    if (searchInput) searchInput.focus();
+  }
+});
