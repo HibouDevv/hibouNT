@@ -1,3 +1,10 @@
+window.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "light") {
+    document.body.classList.add("light-mode");
+  }
+});
+
 // Clock format preference
 let clockFormat = "24"; // default
 
@@ -268,11 +275,15 @@ document.getElementById("closeSettings").addEventListener("click", closeSettings
 // Section templates
 const sections = {
   theme: `
-    <h3>Theme Settings</h3>
-    <label>
-      <input type="checkbox" id="themeToggle" />
-      Enable Dark Mode
-    </label>
+  <h3>Theme Settings</h3>
+  <label>
+    <input type="radio" name="themeMode" value="light" id="lightMode" />
+    Light Mode
+  </label><br/>
+  <label>
+    <input type="radio" name="themeMode" value="dark" id="darkMode" />
+    Dark Mode
+  </label>
   `,
   particles: `
     <h3>Particles</h3>
@@ -331,6 +342,31 @@ document.getElementById("closeSettings").addEventListener("click", closeSettings
     });
   }
 
+ if (section === "theme") {
+  const lightRadio = document.getElementById("lightMode");
+  const darkRadio = document.getElementById("darkMode");
+
+  // Set initial state based on saved theme
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "light") {
+    lightRadio.checked = true;
+    document.body.classList.add("light-mode");
+  } else {
+    darkRadio.checked = true;
+    document.body.classList.remove("light-mode");
+  }
+
+  lightRadio.addEventListener("change", () => {
+    document.body.classList.add("light-mode");
+    localStorage.setItem("theme", "light");
+  });
+
+  darkRadio.addEventListener("change", () => {
+    document.body.classList.remove("light-mode");
+    localStorage.setItem("theme", "dark");
+  });
+}
+
 function saveGreeting() {
   const greeting = document.getElementById("greetingInput").value;
   localStorage.setItem("customGreeting", greeting);
@@ -341,27 +377,3 @@ function clearTodo() {
   localStorage.removeItem("todoList");
   alert("To-do list cleared!");
 }
-
-document.addEventListener("keydown", (e) => {
-  // ESC to close settings
-  if (e.key === "Escape") {
-    const overlay = document.getElementById("settingsOverlay");
-    if (overlay && overlay.classList.contains("settings-visible")) {
-      closeSettings();
-    }
-  }
-
-  // "/" to focus search input
-  if (
-    e.key === "/" &&
-    !e.ctrlKey &&
-    !e.metaKey &&
-    !e.altKey &&
-    document.activeElement.tagName !== "INPUT" &&
-    document.activeElement.tagName !== "TEXTAREA"
-  ) {
-    e.preventDefault(); // prevent browser Quick Find
-    const searchInput = document.getElementById("searchInput");
-    if (searchInput) searchInput.focus();
-  }
-});
