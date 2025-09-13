@@ -331,29 +331,6 @@ body.light-mode #todoInput {
   pointer-events: auto;
 }
 
-/* Sidebar */
-.settings-sidebar {
-  width: 220px;
-  background-color: #111;
-  color: #fff;
-  padding: 20px;
-  border-right: 1px solid #333;
-}
-
-.settings-sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.settings-sidebar li {
-  margin-bottom: 15px;
-  cursor: pointer;
-}
-
-.settings-sidebar li.active {
-  font-weight: bold;
-  color: #fff;
-}
 
 /* Content */
 .settings-content {
@@ -393,12 +370,23 @@ body.light-mode #todoInput {
   background-color: #5a5a5a;
   box-shadow: 0 0 10px #ffffff33;
 }
-body.light-mode .settings-sidebar {
-  background-color: #f0f0f0;
-  color: #000;
-  border-right: 1px solid #ccc;
-}
+
 #openSettings.hidden {
   opacity: 0;
   pointer-events: none;
+}
+
+.settings-content {
+  flex: 1;
+  padding: 30px;
+  color: #fff;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.settings-content h3 {
+  margin-top: 30px;
+  font-size: 1.2em;
+  border-bottom: 1px solid #444;
+  padding-bottom: 6px;
 }

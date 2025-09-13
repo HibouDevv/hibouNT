@@ -65,24 +65,25 @@ const namePrompt = document.getElementById("namePrompt");
 const saveNameBtn = document.getElementById("saveName");
 const mainContent = document.getElementById("mainContent");
 
-const updateGreeting = () => {
+function updateGreeting() {
   const greetingElement = document.getElementById("greeting");
   const name = localStorage.getItem("userName") || "friend";
   const hour = new Date().getHours();
-  let greeting = "";
+
+  let timeGreeting = "";
 
   if (hour < 5) {
-    greeting = "Good night";
+    timeGreeting = "Good night";
   } else if (hour < 12) {
-    greeting = "Good morning";
+    timeGreeting = "Good morning";
   } else if (hour < 17) {
-    greeting = "Good afternoon";
+    timeGreeting = "Good afternoon";
   } else {
-    greeting = "Good evening";
+    timeGreeting = "Good evening";
   }
 
-  greetingElement.innerHTML = `${greeting}, ${name}`;
-};
+  greetingElement.innerHTML = `${timeGreeting}, ${name}`;
+}
 
 window.addEventListener("DOMContentLoaded", () => {
   const savedName = localStorage.getItem("userName");
@@ -273,8 +274,7 @@ function closeSettings() {
 document.getElementById("closeSettings").addEventListener("click", closeSettings);
 
 // Section templates
-const sections = {
-  theme: `
+const settingsContent = `
   <h3>Theme Settings</h3>
   <label>
     <input type="radio" name="themeMode" value="light" id="lightMode" />
@@ -284,31 +284,29 @@ const sections = {
     <input type="radio" name="themeMode" value="dark" id="darkMode" />
     Dark Mode
   </label>
-  `,
-  particles: `
-    <h3>Particles</h3>
-    <label>
-      <input type="checkbox" id="particlesToggle" />
-      Show Background Particles
-    </label>
-  `,
-  sound: `
-    <h3>Ambient Sound</h3>
-    <label>
-      <input type="checkbox" id="soundToggle" disabled />
-      Coming Soon
-    </label>
-  `,
-  greeting: `
-    <h3>Greeting</h3>
-    <input type="text" id="greetingInput" placeholder="Enter your greeting" />
-    <button onclick="saveGreeting()">Save</button>
-  `,
-  todo: `
-    <h3>To-Do Settings</h3>
-    <button onclick="clearTodo()">Clear All Tasks</button>
-  `
-};
+
+  <h3>Particles</h3>
+  <label>
+    <input type="checkbox" id="particlesToggle" checked />
+    Show Background Particles
+  </label>
+
+  <h3>Ambient Sound</h3>
+  <label>
+    <input type="checkbox" id="soundToggle" disabled />
+    Coming Soon
+  </label>
+
+  <h3>Greeting</h3>
+  <input type="text" id="nameOverrideInput" placeholder="What should we call you?" />
+  <button onclick="saveNameOverride()">Save</button>
+
+  <h3>To-Do Settings</h3>
+  <button onclick="clearTodo()">Clear All Tasks</button>
+`;
+
+document.getElementById("settingsPanel").innerHTML = settingsContent;
+wireUpSettings(); // new function to handle all logic
 
 // Load section content
 document.querySelectorAll(".settings-sidebar li").forEach((item) => {
@@ -368,12 +366,70 @@ document.getElementById("closeSettings").addEventListener("click", closeSettings
 }
 
 function saveGreeting() {
-  const greeting = document.getElementById("greetingInput").value;
-  localStorage.setItem("customGreeting", greeting);
-  alert("Greeting saved!");
+  const greeting = document.getElementById("greetingInput").value.trim();
+  if (greeting) {
+    localStorage.setItem("customGreeting", greeting);
+    updateGreeting(); // refresh greeting display
+    alert("Greeting saved!");
+  }
 }
 
 function clearTodo() {
-  localStorage.removeItem("todoList");
+  todos = []; // clear the array
+  localStorage.setItem("todos", JSON.stringify(todos));
+  renderTodos(); // refresh the list
   alert("To-do list cleared!");
+}
+
+function wireUpSettings() {
+  // Theme toggle
+  const lightRadio = document.getElementById("lightMode");
+  const darkRadio = document.getElementById("darkMode");
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "light") {
+    lightRadio.checked = true;
+    document.body.classList.add("light-mode");
+  } else {
+    darkRadio.checked = true;
+    document.body.classList.remove("light-mode");
+  }
+
+  lightRadio.addEventListener("change", () => {
+    document.body.classList.add("light-mode");
+    localStorage.setItem("theme", "light");
+  });
+
+  darkRadio.addEventListener("change", () => {
+    document.body.classList.remove("light-mode");
+    localStorage.setItem("theme", "dark");
+  });
+
+  // Particles toggle
+  const particlesToggle = document.getElementById("particlesToggle");
+  const particlesCanvas = document.getElementById("tsparticles");
+  particlesToggle.addEventListener("change", (e) => {
+    if (particlesCanvas) {
+      particlesCanvas.style.display = e.target.checked ? "block" : "none";
+    }
+  });
+
+  const greetingInput = document.getElementById("greetingInput");
+  if (greetingInput) {
+    greetingInput.value = localStorage.getItem("customGreeting") || "";
+
+    const nameInput = document.getElementById("nameOverrideInput");
+    if (nameInput) {
+      nameInput.value = localStorage.getItem("userName") || "";
+    }
+  }
+}
+
+  function saveNameOverride() {
+  const newName = document.getElementById("nameOverrideInput").value.trim();
+  if (newName) {
+    localStorage.setItem("userName", newName);
+    updateGreeting();
+    alert("Name updated!");
+  }
 }
