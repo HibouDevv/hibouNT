@@ -10,6 +10,7 @@ body {
   margin: 0;
   font-weight: lighter;
   transition: background-color 0.5s ease, color 0.5s ease;
+  overflow: hidden;
 }
 
 #currentTime {
@@ -232,7 +233,7 @@ body.light-mode #greeting {
   position: fixed;
   margin: 10px;
   bottom: 10px;
-  right: 10px;
+  right: 15px;
   width: 250px;
   background-color: #1e1e1e;
   color: #ffffff;
@@ -244,7 +245,7 @@ body.light-mode #greeting {
   pointer-events: auto;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.4s ease, transform 0.6s ease;
 }
 
 .todo-container.visible {
@@ -354,7 +355,7 @@ body.light-mode #todoInput {
 #openSettings {
   position: fixed;
   top: 20px;
-  right: 20px;
+  right: 25px;
   background-color: #3a3a3a;
   color: #fff;
   border: none;
@@ -389,4 +390,27 @@ body.light-mode #todoInput {
   font-size: 1.2em;
   border-bottom: 1px solid #444;
   padding-bottom: 6px;
+}
+
+#showtodo {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  background-color: #3a3a3a;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  font-size: 1.2em;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
