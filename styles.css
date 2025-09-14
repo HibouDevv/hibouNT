@@ -13,15 +13,6 @@ body {
   overflow: hidden;
 }
 
-#currentTime {
-  font-family: "Roboto", sans-serif;
-  font-weight: bold;
-  font-size: 20em;
-  color: #ffffff;
-  text-align: center;
-  position: relative;
-}
-
 #currentDate {
   font-family: "Roboto", sans-serif;
   font-size: 5em;
@@ -89,17 +80,30 @@ body.light-mode #currentDate {
   color: #000000;
 }
 
-body.light-mode .settings-panel {
-  background-color: #f0f0f0;
+body.light-mode #settingsOverlay {
+  background-color: rgba(255,255,255,0.95);
+}
+
+body.light-mode .settings-content {
   color: #000000;
 }
 
-body.light-mode .settings-panel select {
+body.light-mode .settings-content input[type="radio"] {
+  accent-color: #000000;
+}
+
+body.light-mode .settings-content input[type="text"] {
   background-color: #ffffff;
   color: #000000;
+  border: 1px solid #ccc;
 }
 
-#currentTime, #currentDate {
+body.light-mode .settings-content button {
+  background-color: #dddddd;
+  color: #000000;
+}
+
+#currentDate {
   opacity: 0;
   animation: fadeIn 1s ease-in forwards;
 }
@@ -338,6 +342,8 @@ body.light-mode #todoInput {
   flex: 1;
   padding: 30px;
   color: #fff;
+  overflow-y: auto;
+  max-height: 90vh;
 }
 
 /* Close Button */
@@ -350,6 +356,10 @@ body.light-mode #todoInput {
   font-size: 1.5em;
   color: #fff;
   cursor: pointer;
+}
+
+body.light-mode #closeSettings {
+  color: #000000;
 }
 
 #openSettings {
@@ -377,19 +387,25 @@ body.light-mode #todoInput {
   pointer-events: none;
 }
 
-.settings-content {
-  flex: 1;
-  padding: 30px;
-  color: #fff;
-  overflow-y: auto;
-  max-height: 90vh;
-}
-
 .settings-content h3 {
   margin-top: 30px;
   font-size: 1.2em;
   border-bottom: 1px solid #444;
   padding-bottom: 6px;
+  color: #fff;
+}
+
+.settings-content label {
+  color: #fff;
+}
+
+body.light-mode .settings-content h3 {
+  border-bottom: 1px solid #ccc;
+  color: #000000;
+}
+
+body.light-mode .settings-content label {
+  color: #000000;
 }
 
 #showtodo {
@@ -413,4 +429,49 @@ html, body {
 
 body::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
+}
+
+/* Shared styles */
+#clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--clock-color, #fff);
+  margin-bottom: 40px;
+}
+
+.time-row {
+  display: flex;
+  align-items: center;
+}
+
+.time {
+  font-size: 9rem;       /* main time large */
+  font-weight: 700;
+  line-height: 1;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 14px;     /* a little more breathing room */
+  line-height: 1;
+}
+
+.ampm {
+  font-size: 2.7rem;       /* smaller than seconds */
+  font-weight: 600;
+  margin-bottom: 0.2rem; /* tighter spacing */
+}
+
+.seconds {
+  font-size: 3.5rem;       /* bigger than AM/PM, but smaller than main time */
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+#clock.light-mode {
+  --clock-color: #000; /* dark text for light mode */
 }
