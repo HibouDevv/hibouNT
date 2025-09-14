@@ -1,6 +1,11 @@
 {
   "name": "HibouNT",
   "version": "1.0",
+  "description": "A minimalist new tab experience.",
   "manifest_version": 3,
-  "chrome_url_overrides": {"newtab": "index.html"}
+  "chrome_url_overrides": {"newtab": "index.html"},
+   "permissions": [
+        "activeTab",
+        "storage" 
+      ]
 }
