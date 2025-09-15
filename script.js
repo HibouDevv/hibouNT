@@ -196,6 +196,13 @@ const settingsContent = `
     <input type="radio" name="clockFormat" value="24" id="clockFormat24" />
     24-Hour
     </label>
+    <h3>Search Engine</h3>
+    <label for="searchEngine">Search Engine:</label>
+  <select id="searchEngine">
+    <option value="google">Google</option>
+    <option value="bing">Bing</option>
+    <option value="duckduckgo">DuckDuckGo</option>
+  </select>
   <h3>Particles</h3>
   <label>
     <input type="checkbox" id="particlesToggle" checked />
@@ -377,4 +384,43 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+const searchEngineSelect = document.getElementById("searchEngine");
 
+if (searchEngineSelect) {
+  searchEngineSelect.addEventListener("change", () => {
+  const selectedEngine = searchEngineSelect.value;
+  localStorage.setItem("searchEngine", selectedEngine);
+  updateSearchPreview(selectedEngine); // optional visual feedback
+});
+
+  // Set dropdown to saved value on load
+  const savedEngine = localStorage.getItem("searchEngine");
+  if (savedEngine) {
+    searchEngineSelect.value = savedEngine;
+  }
+}
+
+document.getElementById("searchBtn").addEventListener("click", () => {
+  const query = document.getElementById("searchQuery").value.trim();
+  const engine = localStorage.getItem("searchEngine") || "google";
+
+  let url = "";
+
+  switch (engine) {
+    case "google":
+      url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      break;
+    case "bing":
+      url = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
+      break;
+    case "duckduckgo":
+      url = `https://duckduckgo.com/?q=${encodeURIComponent(query)}`;
+      break;
+  }
+
+  window.open(url, "_blank");
+});
+
+document.getElementById("searchEngine").addEventListener("change", (e) => {
+  localStorage.setItem("searchEngine", e.target.value);
+});
