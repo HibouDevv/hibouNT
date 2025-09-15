@@ -1,4 +1,3 @@
-
 // Theme initialization
 window.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem("theme");
@@ -9,30 +8,42 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+let use24Hour = false; // will be set based on settings
 
-let clockFormat = "24"; // default
-function updateTime() {
-  const currentTimeElement = document.getElementById('currentTime');
-  if (!currentTimeElement) return;
+function updateClock() {
   const now = new Date();
   let hours = now.getHours();
-  let minutes = now.getMinutes().toString().padStart(2, '0');
-  if (clockFormat === "12") {
-    const suffix = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12 || 12;
-    currentTimeElement.innerHTML = `${hours}:${minutes} ${suffix}`;
+  let minutes = now.getMinutes().toString().padStart(2, "0");
+  let seconds = now.getSeconds().toString().padStart(2, "0");
+
+  const timeEl = document.querySelector("#clock .time");
+  const ampmEl = document.querySelector("#clock .ampm");
+  const secondsEl = document.querySelector("#clock .seconds");
+
+  if (use24Hour) {
+    // 24-hour format
+    timeEl.textContent = `${hours.toString().padStart(2, "0")}:${minutes}:${seconds}`;
+    ampmEl.textContent = ""; // hide AM/PM
+    secondsEl.textContent = ""; // hide separate seconds
   } else {
-    currentTimeElement.innerHTML = `${hours.toString().padStart(2, '0')}:${minutes}`;
+    // 12-hour format
+    let displayHours = hours % 12 || 12;
+    let ampm = hours >= 12 ? "PM" : "AM";
+    timeEl.textContent = `${displayHours}:${minutes}`;
+    ampmEl.textContent = ampm;
+    secondsEl.textContent = seconds;
   }
 }
+
 function updateDate() {
   const currentDateElement = document.getElementById('currentDate');
   if (!currentDateElement) return;
   currentDateElement.innerHTML = new Date().toDateString().split(' ').slice(0, 3).join(' ');
 }
-setInterval(updateTime, 1000);
 setInterval(updateDate, 1000);
-
+setInterval(updateClock, 1000);
+updateClock();
+updateDate();
 
 // Search logic
 let selectedEngine = "google"; // default
@@ -141,10 +152,12 @@ document.getElementById("saveName").addEventListener("click", () => {
     localStorage.setItem("userName", name);
     document.getElementById("namePrompt").style.display = "none";
     document.getElementById("mainContent").style.display = "block";
-    document.querySelector(".todo-container").style.display = "block";
+    const todoCont = document.querySelector(".todo-container");
+    todoCont.style.display = "block";
+    todoCont.classList.add("visible");
     document.getElementById("openSettings").style.display = "block";
     updateGreeting();
-    updateTime();
+    updateClock();
     updateDate();
     renderTodos();
   }
@@ -174,6 +187,15 @@ const settingsContent = `
     <input type="radio" name="themeMode" value="dark" id="darkMode" />
     Dark Mode
   </label>
+  <h3>Clock Format</h3>
+  <label>
+    <input type="radio" name="clockFormat" value="12" id="clockFormat12" checked />
+    12-Hour
+    </label><br/>
+    <label>
+    <input type="radio" name="clockFormat" value="24" id="clockFormat24" />
+    24-Hour
+    </label>
   <h3>Particles</h3>
   <label>
     <input type="checkbox" id="particlesToggle" checked />
@@ -221,6 +243,32 @@ function wireUpSettings() {
       particlesCanvas.style.display = e.target.checked ? "block" : "none";
     }
   });
+  // Clock format
+  const clock12Radio = document.getElementById("clockFormat12");
+  const clock24Radio = document.getElementById("clockFormat24");
+  let savedClockFormat = localStorage.getItem("clockFormat");
+  if (!savedClockFormat) {
+    savedClockFormat = "12";
+    localStorage.setItem("clockFormat", "12");
+  }
+  if (savedClockFormat === "12") {
+    clock12Radio.checked = true;
+    use24Hour = false;
+  } else {
+    clock24Radio.checked = true;
+    use24Hour = true;
+  }
+  clock12Radio.addEventListener("change", () => {
+    use24Hour = false;
+    localStorage.setItem("clockFormat", "12");
+    updateClock();
+  });
+  clock24Radio.addEventListener("change", () => {
+    use24Hour = true;
+    localStorage.setItem("clockFormat", "24");
+    updateClock();
+  });
+
   // Name override
   const nameInput = document.getElementById("nameOverrideInput");
   if (nameInput) {
@@ -317,13 +365,16 @@ window.addEventListener("DOMContentLoaded", () => {
     // Show everything else
     if (namePrompt) namePrompt.style.display = "none";
     if (mainContent) mainContent.style.display = "block";
-    if (todoContainer) todoContainer.style.display = "block";
+    if (todoContainer) {
+      todoContainer.style.display = "block";
+      todoContainer.classList.add("visible");
+    }
     if (openSettingsBtn) openSettingsBtn.style.display = "block";
     updateGreeting();
-    updateTime();
+    updateClock();
     updateDate();
     renderTodos();
   }
 });
 
-document.querySelector(".todo-container").classList.add("visible");
+
