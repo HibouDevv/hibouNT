@@ -472,6 +472,7 @@ body::-webkit-scrollbar {
   opacity: 0.9;
 }
 
-#clock.light-mode {
-  --clock-color: #000; /* dark text for light mode */
+body.light-mode #clock {
+  --clock-color: #000; /* dark text for light backgrounds */
+  color: #000;
 }

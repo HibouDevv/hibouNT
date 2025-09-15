@@ -152,7 +152,9 @@ document.getElementById("saveName").addEventListener("click", () => {
     localStorage.setItem("userName", name);
     document.getElementById("namePrompt").style.display = "none";
     document.getElementById("mainContent").style.display = "block";
-    document.querySelector(".todo-container").style.display = "block";
+    const todoCont = document.querySelector(".todo-container");
+    todoCont.style.display = "block";
+    todoCont.classList.add("visible");
     document.getElementById("openSettings").style.display = "block";
     updateGreeting();
     updateClock();
@@ -363,7 +365,10 @@ window.addEventListener("DOMContentLoaded", () => {
     // Show everything else
     if (namePrompt) namePrompt.style.display = "none";
     if (mainContent) mainContent.style.display = "block";
-    if (todoContainer) todoContainer.style.display = "block";
+    if (todoContainer) {
+      todoContainer.style.display = "block";
+      todoContainer.classList.add("visible");
+    }
     if (openSettingsBtn) openSettingsBtn.style.display = "block";
     updateGreeting();
     updateClock();
