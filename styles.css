@@ -439,6 +439,13 @@ body::-webkit-scrollbar {
   font-family: 'Segoe UI', sans-serif;
   color: var(--clock-color, #fff);
   margin-bottom: 40px;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 .time-row {
