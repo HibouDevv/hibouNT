@@ -401,7 +401,7 @@ if (searchEngineSelect) {
 }
 
 document.getElementById("searchBtn").addEventListener("click", () => {
-  const query = document.getElementById("searchQuery").value.trim();
+  const query = document.getElementById("searchInput").value.trim();
   const engine = localStorage.getItem("searchEngine") || "google";
 
   let url = "";
