@@ -195,8 +195,8 @@ const settingsContent = `
   </label>
   <h3>Ambient Sound</h3>
   <label>
-    <input type="checkbox" id="soundToggle" disabled />
-    Coming Soon
+    <input type="checkbox" id="soundToggle" />
+  	Play Ambient Sound
   </label>
   <h3>Greeting</h3>
   <input type="text" id="nameOverrideInput" placeholder="What should we call you?" />
@@ -266,6 +266,48 @@ function wireUpSettings() {
   if (nameInput) {
     nameInput.value = localStorage.getItem("userName") || "";
   }
+  
+  const soundToggle = document.getElementById("soundToggle");
+const iframeContainer = document.createElement("div");
+iframeContainer.id = "ambientIframeContainer";
+iframeContainer.style.position = "fixed";
+iframeContainer.style.zIndex = "-99";
+iframeContainer.style.width = "0";
+iframeContainer.style.height = "0";
+iframeContainer.style.overflow = "hidden";
+document.body.appendChild(iframeContainer);
+
+function loadAmbientIframe() {
+  iframeContainer.innerHTML = `
+    <iframe
+      src="https://www.youtube.com/embed/DZpPhCGoPLg?autoplay=1&controls=0&loop=1&playlist=DZpPhCGoPLg"
+      frameborder="0"
+      allow="autoplay"
+      style="width:0;height:0;opacity:0;"
+    ></iframe>
+  `;
+}
+
+function unloadAmbientIframe() {
+  iframeContainer.innerHTML = "";
+}
+
+// Initialize based on saved setting
+const soundEnabled = localStorage.getItem("ambientSound") === "on";
+soundToggle.checked = soundEnabled;
+if (soundEnabled) loadAmbientIframe();
+
+// Toggle listener
+soundToggle.addEventListener("change", () => {
+  if (soundToggle.checked) {
+    localStorage.setItem("ambientSound", "on");
+    loadAmbientIframe();
+  } else {
+    localStorage.setItem("ambientSound", "off");
+    unloadAmbientIframe();
+  }
+});
+
 }
 function saveNameOverride() {
   const newName = document.getElementById("nameOverrideInput").value.trim();
