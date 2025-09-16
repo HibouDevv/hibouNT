@@ -45,21 +45,6 @@ setInterval(updateClock, 1000);
 updateClock();
 updateDate();
 
-// Search logic
-let selectedEngine = "google"; // default
-document.getElementById("searchBtn").addEventListener("click", () => {
-  const query = document.getElementById("searchInput").value.trim();
-  if (!query) return;
-  let url = "https://www.google.com/search?q=" + encodeURIComponent(query);
-  window.location.href = url;
-});
-document.getElementById("searchInput").addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    document.getElementById("searchBtn").click();
-  }
-});
-
-
 function updateGreeting() {
   const greetingElement = document.getElementById("greeting");
   const name = localStorage.getItem("userName") || "friend";
@@ -402,23 +387,32 @@ if (searchEngineSelect) {
 
 document.getElementById("searchBtn").addEventListener("click", () => {
   const query = document.getElementById("searchInput").value.trim();
-  const engine = localStorage.getItem("searchEngine") || "google";
+  if (!query) return;
 
+  const engine = localStorage.getItem("searchEngine") || "google";
   let url = "";
 
   switch (engine) {
-    case "google":
-      url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-      break;
     case "bing":
       url = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
       break;
     case "duckduckgo":
       url = `https://duckduckgo.com/?q=${encodeURIComponent(query)}`;
       break;
+    case "google":
+    default:
+      url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      break;
   }
 
-  window.open(url, "_blank");
+  window.open(url, "_blank"); // ✅ opens in new tab
+});
+
+document.getElementById("searchInput").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    document.getElementById("searchBtn").click();
+  }
 });
 
 document.getElementById("searchEngine").addEventListener("change", (e) => {
