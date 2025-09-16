@@ -45,21 +45,6 @@ setInterval(updateClock, 1000);
 updateClock();
 updateDate();
 
-// Search logic
-let selectedEngine = "google"; // default
-document.getElementById("searchBtn").addEventListener("click", () => {
-  const query = document.getElementById("searchInput").value.trim();
-  if (!query) return;
-  let url = "https://www.google.com/search?q=" + encodeURIComponent(query);
-  window.location.href = url;
-});
-document.getElementById("searchInput").addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    document.getElementById("searchBtn").click();
-  }
-});
-
-
 function updateGreeting() {
   const greetingElement = document.getElementById("greeting");
   const name = localStorage.getItem("userName") || "friend";
@@ -196,6 +181,13 @@ const settingsContent = `
     <input type="radio" name="clockFormat" value="24" id="clockFormat24" />
     24-Hour
     </label>
+    <h3>Search Engine</h3>
+    <label for="searchEngine">Search Engine:</label>
+  <select id="searchEngine">
+    <option value="google">Google</option>
+    <option value="bing">Bing</option>
+    <option value="duckduckgo">DuckDuckGo</option>
+  </select>
   <h3>Particles</h3>
   <label>
     <input type="checkbox" id="particlesToggle" checked />
@@ -377,4 +369,52 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+const searchEngineSelect = document.getElementById("searchEngine");
 
+if (searchEngineSelect) {
+  searchEngineSelect.addEventListener("change", () => {
+  const selectedEngine = searchEngineSelect.value;
+  localStorage.setItem("searchEngine", selectedEngine);
+  updateSearchPreview(selectedEngine); // optional visual feedback
+});
+
+  // Set dropdown to saved value on load
+  const savedEngine = localStorage.getItem("searchEngine");
+  if (savedEngine) {
+    searchEngineSelect.value = savedEngine;
+  }
+}
+
+document.getElementById("searchBtn").addEventListener("click", () => {
+  const query = document.getElementById("searchInput").value.trim();
+  if (!query) return;
+
+  const engine = localStorage.getItem("searchEngine") || "google";
+  let url = "";
+
+  switch (engine) {
+    case "bing":
+      url = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
+      break;
+    case "duckduckgo":
+      url = `https://duckduckgo.com/?q=${encodeURIComponent(query)}`;
+      break;
+    case "google":
+    default:
+      url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      break;
+  }
+
+  window.open(url, "_blank"); // ✅ opens in new tab
+});
+
+document.getElementById("searchInput").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    document.getElementById("searchBtn").click();
+  }
+});
+
+document.getElementById("searchEngine").addEventListener("change", (e) => {
+  localStorage.setItem("searchEngine", e.target.value);
+});

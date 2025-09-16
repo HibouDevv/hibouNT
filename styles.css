@@ -484,3 +484,20 @@ body.light-mode #clock {
   --clock-color: #000; /* dark text for light backgrounds */
   color: #000;
 }
+
+#searchEngine {
+  padding: 6px;
+  font-size: 1rem;
+  border-radius: 4px;
+  background-color: var(--dropdown-bg, #222);
+  color: var(--dropdown-text, #fff);
+  border: 1px solid #444;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Optional: hover and focus styles */
+#searchEngine:hover,
+#searchEngine:focus {
+  background-color: #333;
+  border-color: #666;
+}
