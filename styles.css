@@ -575,3 +575,44 @@ body:not(.minimal-mode) #clock,
 body:not(.minimal-mode) #searchBox {
   transform: translateX(0);
 }
+
+#wave-bg {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 220px;           /* adjust wave height */
+  pointer-events: none;    /* clicks pass through */
+  z-index: -1;      			 /* behind your UI */
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Make waves fill and overlap slightly for depth */
+#wave-bg .wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;             /* two tiles side-by-side */
+  height: 50%;
+}
+
+/* Layering and subtle parallax */
+#wave-bg .wave-back { height: 55%; opacity: 0.6; filter: blur(0.3px); }
+#wave-bg .wave-front { height: 70%; opacity: 0.9; }
+
+/* Optional: smooth page transitions */
+body, #wave-bg .wave {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  #wave-bg .wave .moving animateTransform { display: none; }
+}
+
+body.wave-enabled #wave-bg {
+  visibility: visible;
+  opacity: 1;
+}
