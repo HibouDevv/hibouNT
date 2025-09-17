@@ -549,3 +549,7 @@ body.minimal-mode * {
 body.minimal-mode #greeting {
 	display: none;
 }
+
+body.minimal-mode #currentDate {
+	display: none;
+}
