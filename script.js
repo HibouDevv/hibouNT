@@ -331,7 +331,10 @@ minimalToggle.addEventListener("change", () => {
 });
 
 document.addEventListener("keydown", (e) => {
-  if (e.key.toLowerCase() === "m") {
+  const activeTag = document.activeElement.tagName.toLowerCase();
+  const isTyping = activeTag === "input" || activeTag === "textarea";
+
+  if (!isTyping && e.key.toLowerCase() === "m") {
     const isMinimal = document.body.classList.contains("minimal-mode");
     applyMinimalMode(!isMinimal);
     minimalToggle.checked = !isMinimal;
