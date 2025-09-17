@@ -501,3 +501,51 @@ body.light-mode #clock {
   background-color: #333;
   border-color: #666;
 }
+
+button:hover {
+  transform: scale(1.05);
+}
+
+body.minimal-mode #nonEssentialUI {
+  display: none;
+}
+
+body.minimal-mode {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+}
+
+body.light-theme.minimal-mode {
+  background-color: #1e1e1e !important;
+  --text-color: #222;
+}
+
+body.minimal-mode button,
+body.minimal-mode input,
+body.minimal-mode select {
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+}
+
+:root {
+  --bg-color: #1e1e1e;
+  --text-color: #f0f0f0;
+  --button-bg: #2c2c2c;
+}
+
+body.light-theme {
+  --bg-color: #f5f5f5;
+  --text-color: #222222;
+  --button-bg: #ffffff;
+}
+
+body.minimal-mode * {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border-color: #444 !important;
+}
+
+body.minimal-mode #greeting {
+	display: none;
+}
