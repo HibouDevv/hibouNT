@@ -455,7 +455,7 @@ body::-webkit-scrollbar {
 }
 
 .time {
-  font-size: 17rem;       /* main time large */
+  font-size: 20rem;       /* main time large */
   font-weight: 700;
   line-height: 1;
 }
@@ -469,13 +469,13 @@ body::-webkit-scrollbar {
 }
 
 .ampm {
-  font-size: 5rem;       /* smaller than seconds */
+  font-size: 6.5rem;       /* smaller than seconds */
   font-weight: 600;
   margin-bottom: 0.2rem; /* tighter spacing */
 }
 
 .seconds {
-  font-size: 6.5rem;       /* bigger than AM/PM, but smaller than main time */
+  font-size: 8rem;       /* bigger than AM/PM, but smaller than main time */
   font-weight: 500;
   opacity: 0.9;
 }
