@@ -28,6 +28,7 @@ body {
   animation: slideUp 0.8s ease-out forwards;
   animation-delay: 0.5s;
   justify-content: center;
+  transition-delay: 0.2s;
 }
 
 body.light-mode #searchInput {
@@ -441,6 +442,7 @@ body::-webkit-scrollbar {
   margin-bottom: 40px;
   opacity: 0;
   animation: fadeIn 1s ease-in forwards;
+  transition-delay: 0.1s;
 }
 
 @keyframes fadeIn {
@@ -552,4 +554,24 @@ body.minimal-mode #greeting {
 
 body.minimal-mode #currentDate {
 	display: none;
+}
+
+#clock, .search-container {
+  position: relative;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+body.minimal-mode #clock {
+  transform: translateY(-50px);
+  opacity: 1;
+}
+
+body.minimal-mode .search-container {
+  transform: translateY(50px);
+  opacity: 1;
+}
+
+body:not(.minimal-mode) #clock,
+body:not(.minimal-mode) #searchBox {
+  transform: translateX(0);
 }
