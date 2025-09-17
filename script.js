@@ -193,11 +193,16 @@ Toggle Minimal Mode (or press the "M" key to toggle it on or off)
     <option value="bing">Bing</option>
     <option value="duckduckgo">DuckDuckGo</option>
   </select>
-  <h3>Particles</h3>
+  <h3>Background Effects</h3>
   <label>
     <input type="checkbox" id="particlesToggle" checked />
     Show Background Particles
   </label>
+  <br>
+  <label>
+  <input type="checkbox" id="waveToggle">
+  Enable Wave Background
+</label>
   <h3>Ambient Sound</h3>
   <label>
     <input type="checkbox" id="soundToggle" />
@@ -331,11 +336,32 @@ minimalToggle.addEventListener("change", () => {
 });
 
 document.addEventListener("keydown", (e) => {
-  if (e.key.toLowerCase() === "m") {
+  const activeTag = document.activeElement.tagName.toLowerCase();
+  const isTyping = ["input", "textarea"].includes(activeTag);
+  if (isTyping) return;
+
+  const key = e.key.toLowerCase();
+
+  if (key === "m") {
     const isMinimal = document.body.classList.contains("minimal-mode");
     applyMinimalMode(!isMinimal);
     minimalToggle.checked = !isMinimal;
   }
+});
+
+const waveToggle = document.getElementById("waveToggle");
+
+// Load saved preference
+if (localStorage.getItem("waveEnabled") === "true") {
+  document.body.classList.add("wave-enabled");
+  waveToggle.checked = true;
+}
+
+// Listen for changes
+waveToggle.addEventListener("change", () => {
+  const enabled = waveToggle.checked;
+  localStorage.setItem("waveEnabled", enabled);
+  document.body.classList.toggle("wave-enabled", enabled);
 });
 
 }
