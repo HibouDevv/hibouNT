@@ -172,6 +172,11 @@ const settingsContent = `
     <input type="radio" name="themeMode" value="dark" id="darkMode" />
     Dark Mode
   </label>
+  <h4>Minimal Mode</h4>
+  <label>
+<input type="checkbox" id="minimalToggle" />
+Toggle Minimal Mode (or press the "M" key to toggle it on or off)
+</label>
   <h3>Clock Format</h3>
   <label>
     <input type="radio" name="clockFormat" value="12" id="clockFormat12" checked />
@@ -196,7 +201,7 @@ const settingsContent = `
   <h3>Ambient Sound</h3>
   <label>
     <input type="checkbox" id="soundToggle" />
-  	Play Ambient Sound
+  	Toggle Ambient Sound
   </label>
   <h3>Greeting</h3>
   <input type="text" id="nameOverrideInput" placeholder="What should we call you?" />
@@ -267,6 +272,7 @@ function wireUpSettings() {
     nameInput.value = localStorage.getItem("userName") || "";
   }
   
+  // Ambient Sound
   const soundToggle = document.getElementById("soundToggle");
 const iframeContainer = document.createElement("div");
 iframeContainer.id = "ambientIframeContainer";
@@ -280,7 +286,7 @@ document.body.appendChild(iframeContainer);
 function loadAmbientIframe() {
   iframeContainer.innerHTML = `
     <iframe
-      src="https://www.youtube.com/embed/DZpPhCGoPLg?autoplay=1&controls=0&loop=1&playlist=DZpPhCGoPLg"
+      src="https://www.youtube.com/embed/DZpPhCGoPLg?enablejsapi=1&autoplay=1&controls=0&loop=1&playlist=DZpPhCGoPLg"
       frameborder="0"
       allow="autoplay"
       style="width:0;height:0;opacity:0;"
@@ -305,6 +311,30 @@ soundToggle.addEventListener("change", () => {
   } else {
     localStorage.setItem("ambientSound", "off");
     unloadAmbientIframe();
+  }
+});
+
+const minimalToggle = document.getElementById("minimalToggle");
+function applyMinimalMode(enabled) {
+  document.body.classList.toggle("minimal-mode", enabled);
+  localStorage.setItem("minimalMode", enabled ? "on" : "off");
+}
+
+// Load saved state
+const savedMinimal = localStorage.getItem("minimalMode") === "on";
+minimalToggle.checked = savedMinimal;
+applyMinimalMode(savedMinimal);
+
+// Listen for changes
+minimalToggle.addEventListener("change", () => {
+  applyMinimalMode(minimalToggle.checked);
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key.toLowerCase() === "m") {
+    const isMinimal = document.body.classList.contains("minimal-mode");
+    applyMinimalMode(!isMinimal);
+    minimalToggle.checked = !isMinimal;
   }
 });
 
