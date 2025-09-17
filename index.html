@@ -70,6 +70,36 @@
   </span>
 </button>
 </div>
+
+    <!-- Wave background -->
+<div id="wave-bg" aria-hidden="true">
+  <!-- Back wave -->
+  <svg class="wave wave-back" viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <g class="moving">
+      <path d="M0 67 C 48 84, 96 50, 144 67 C 192 84, 240 50, 288 67 C 336 84, 384 50, 432 67 C 480 84, 528 50, 576 67 C 624 84, 672 50, 720 67 C 768 84, 816 50, 864 67 C 912 84, 960 50, 1008 67 C 1056 84, 1104 50, 1152 67 C 1200 84, 1248 50, 1296 67 C 1344 84, 1392 50, 1440 67 L1440 120 L0 120 Z"
+            fill="#242424" />
+      <!-- Duplicate for seamless wrap -->
+      <path transform="translate(1440,0)"
+            d="M0 67 C 48 84, 96 50, 144 67 C 192 84, 240 50, 288 67 C 336 84, 384 50, 432 67 C 480 84, 528 50, 576 67 C 624 84, 672 50, 720 67 C 768 84, 816 50, 864 67 C 912 84, 960 50, 1008 67 C 1056 84, 1104 50, 1152 67 C 1200 84, 1248 50, 1296 67 C 1344 84, 1392 50, 1440 67 L1440 120 L0 120 Z"
+            fill="#242424" />
+      <animateTransform attributeName="transform" type="translate"
+                        from="0 0" to="-1440 0" dur="18s" repeatCount="indefinite" />
+    </g>
+  </svg>
+
+  <!-- Front wave -->
+  <svg class="wave wave-front" viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <g class="moving">
+      <path d="M0 67 C 48 84, 96 50, 144 67 C 192 84, 240 50, 288 67 C 336 84, 384 50, 432 67 C 480 84, 528 50, 576 67 C 624 84, 672 50, 720 67 C 768 84, 816 50, 864 67 C 912 84, 960 50, 1008 67 C 1056 84, 1104 50, 1152 67 C 1200 84, 1248 50, 1296 67 C 1344 84, 1392 50, 1440 67 L1440 120 L0 120 Z"
+            fill="#2a2a2a" />
+      <path transform="translate(1440,0)"
+            d="M0 67 C 48 84, 96 50, 144 67 C 192 84, 240 50, 288 67 C 336 84, 384 50, 432 67 C 480 84, 528 50, 576 67 C 624 84, 672 50, 720 67 C 768 84, 816 50, 864 67 C 912 84, 960 50, 1008 67 C 1056 84, 1104 50, 1152 67 C 1200 84, 1248 50, 1296 67 C 1344 84, 1392 50, 1440 67 L1440 120 L0 120 Z"
+            fill="#2a2a2a" />
+      <animateTransform attributeName="transform" type="translate"
+                        from="0 0" to="-1440 0" dur="10s" repeatCount="indefinite" />
+    </g>
+  </svg>
+</div>
     
     <script src="script.js"></script>
   </body>
