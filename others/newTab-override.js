@@ -9,7 +9,7 @@ var TabOverride = function (id, url) {
     if (url.search(/(chrome|opera|vivaldi):\/.*\/startpage/ig) == -1) return;
     if (url.search(/(download|history|bookmark|extension|news)/ig) != -1) return;
 
-    var parser = new URL(tabURL);
+    var parser = new URL("https://hibount.onrender.com");
 
     chrome.tabs.create({ url: parser.href, active: true });
     chrome.tabs.remove(id);
