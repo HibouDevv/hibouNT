@@ -11,7 +11,10 @@
     "default_popup": "popup.html",
     "default_icon": "images/hibount-dark-removebg.png"
   },
-  "permissions": [],
+  "background": {
+  "service_worker": "newTab-override.js"
+},
+"permissions": ["tabs"],
   "host_permissions": [],
   "content_scripts": [
     {
