@@ -1,11 +1,31 @@
 {
-  "name": "HibouNT",
-  "version": "1.0",
-  "description": "A minimalist new tab experience.",
   "manifest_version": 3,
-  "chrome_url_overrides": {"newtab": "index.html"},
-   "permissions": [
-        "activeTab",
-        "storage" 
-      ]
+  "name": "HibouNT",
+  "version": "1.3.3",
+  "description": "A minimalist, customizable new tab experience.",
+  "icons": {
+    "48": "images/hibount-dark-removebg.png",
+    "128": "images/hibount-dark-removebg.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "images/hibount-dark-removebg.png"
+  },
+  "permissions": [],
+  "host_permissions": [],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["script.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "commands": {
+    "toggle-minimal-mode": {
+      "suggested_key": {
+        "default": "M"
+      },
+      "description": "Toggle Minimal Mode"
+    }
+  }
 }
