@@ -347,6 +347,15 @@ document.addEventListener("keydown", (e) => {
     applyMinimalMode(!isMinimal);
     minimalToggle.checked = !isMinimal;
   }
+
+  if (e.key === "Escape") {
+    const overlay = document.getElementById("settingsOverlay");
+    if (overlay.classList.contains("settings-visible")) {
+      closeSettings();
+    } else {
+      openSettings();
+    }
+  }
 });
 
 const waveToggle = document.getElementById("waveToggle");
