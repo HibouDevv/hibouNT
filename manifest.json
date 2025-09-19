@@ -12,7 +12,7 @@
         "default_icon": "images/hibount-dark-removebg.png"
     },
     "background": {
-  "scripts": ["newTab-override.js"],
+  "scripts": ["others/newTab-override.js"],
   "persistent": false
 },
     "permissions": [
